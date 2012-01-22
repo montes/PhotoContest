@@ -5,8 +5,8 @@
 require_once(SMF_FOLDER . 'Settings.php');
 
 //TODO: include lightbox js and css dependencies
-$headers .= '<script type="text/javascript" src="https://www.google.com/jsapi?key=ABQIAAAA4N1cVP8wk_WE1At_kNm57RTJ4bHgoDQQq-6NpuDOPLgwe1GIThRH_hiPQW5HYToH4hz2JfNj41fQAA"></script>';
-$headers .= '<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>';
+$headers    = '<script type="text/javascript" src="https://www.google.com/jsapi?key=ABQIAAAA4N1cVP8wk_WE1At_kNm57RTJ4bHgoDQQq-6NpuDOPLgwe1GIThRH_hiPQW5HYToH4hz2JfNj41fQAA"></script>';
+$headers   .= '<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>';
 
 $context['html_headers'] = $headers;
 

@@ -20,7 +20,8 @@ class SMFDb implements Db
         $smcFunc = $this->_smcFunc;
         
         $result = $smcFunc['db_query']('', $sql);
-        return($smcFunc['db_fetch_assoc']($result));
+        
+        return $smcFunc['db_fetch_assoc']($result);
     }
     
 }

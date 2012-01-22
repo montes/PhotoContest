@@ -1,6 +1,7 @@
 <?php
 /**
- * 
+ * Photo Contest
+ * Written by @mooontes for furgovw.org
  */
 
 function __autoload_photocontest($class) {
@@ -22,20 +23,35 @@ $user           = new PhotoContest\SMFUser($context, $user_info, $db, $options);
 $photos         = new PhotoContest\Photos();
 $photoContest   = new PhotoContest\PhotoContest($db, $user, $photos);
 
+/*$options = array(
+    'state'         => 'closed',
+    'current_round' => '0',
+    'total_rounds'  => '0'
+);
+PhotoContest\PhotoContest::saveConfig($db, $options);*/
+
 //Show page header
 include(dirname(__FILE__) . '/views/header.php');
 
+//Create new photo contest
+if (isset($_GET['create_new_photo_contest'])) {
+    include('views/new_photo_contest_form.php');
+
+//Change admin options
+} elseif (isset($_GET['change_admin_options'])) {
+	include('views/change_admin_options.php');
+
 //Save uploaded photos
-if (isset($_POST['picture_upload_form'])) {
+} elseif (isset($_POST['picture_upload_form'])) {
     
     if ($options['state'] !== 'uploading') {
         $photoContest->queueError('Sorry, you cannot upload photos at this moment');
     } else {
-	$uploadResult = '';
-	foreach($_FILES['picture']['name'] as $index => $pictureName) {
-		$uploadResult .= $photos->addNew($pictureName, $_FILES['picture']['tmp_name'][$index]);
-	}
-	include('views/add_picture_result.php');
+        $uploadResult = '';
+	    foreach($_FILES['picture']['name'] as $index => $pictureName) {
+	        $uploadResult .= $photos->addNew($pictureName, $_FILES['picture']['tmp_name'][$index]);
+	    }
+	    include('views/add_picture_result.php');
     }
         
 //Photo upload form
@@ -62,3 +78,16 @@ if (isset($_POST['picture_upload_form'])) {
 	include(dirname(__FILE__) . '/views/cover.php');
 }
 
+
+
+
+
+function __($text)
+{
+    return $text;
+}
+
+function _e($text)
+{
+    echo $text;
+}
