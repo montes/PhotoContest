@@ -21,7 +21,7 @@ $db             = new PhotoContest\SMFDb($smcFunc);
 $options        = PhotoContest\PhotoContest::loadConfig($db);
 $user           = new PhotoContest\SMFUser($context, $user_info, $db, $options);
 $photos         = new PhotoContest\Photos();
-$photoContest   = new PhotoContest\PhotoContest($db, $user, $photos);
+$photoContest   = new PhotoContest\PhotoContest($db, $user, $photos, $options);
 
 /*$options = array(
     'state'         => 'closed',
@@ -37,9 +37,15 @@ include(dirname(__FILE__) . '/views/header.php');
 if (isset($_GET['create_new_photo_contest'])) {
     include('views/new_photo_contest_form.php');
 
-//Change admin options
-} elseif (isset($_GET['change_admin_options'])) {
-	include('views/change_admin_options.php');
+} elseif (isset($_GET['admin_index'])) {
+    $contests = $photoContest->getContests();
+    include('views/admin_index.php');
+
+//Save new photo contest
+} elseif (isset($_POST['new_contest_submit'])) {
+    $photoContest->createFromForm();
+    $contests = $photoContest->getContests();
+    include('views/admin_index.php');
 
 //Save uploaded photos
 } elseif (isset($_POST['picture_upload_form'])) {

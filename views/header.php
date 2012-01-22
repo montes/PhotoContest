@@ -7,6 +7,12 @@
         <li>
             [<?php _e('Current state'); echo ': ' . $options['state']; ?>]
         </li>
+        <li>
+            <a href="?admin_index"><?php _e('Admin index'); ?></a>
+        </li>
+        <li>
+            <a href="?create_new_photo_contest"><?php _e('Create new photo contest'); ?></a>
+        </li>
         <?php
             switch ($options['state']) {
                 case 'closed':
